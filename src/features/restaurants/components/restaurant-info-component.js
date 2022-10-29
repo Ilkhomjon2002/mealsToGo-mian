@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Image } from "react-native";
 import {
 	CardCover,
@@ -24,12 +24,12 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
 		photos = [
 			"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&w=1000&q=80",
 		],
-		address = "100 some random street",
+		vicinity = "100 some random street",
 		isOpenNow = true,
 		rating = 4,
-		isCloseTemporarily = true,
+		isClosedTemporarily = true,
 	} = restaurant;
-
+	useEffect(() => console.log(restaurant), [restaurant]);
 	const ratingArray = Array.from(new Array(Math.floor(rating)));
 	return (
 		<View>
@@ -44,7 +44,7 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
 							))}
 						</Rating>
 						<SectionEnd>
-							{isCloseTemporarily && (
+							{isClosedTemporarily && (
 								<Text variant="error"> CLOSED TEMPORARILY</Text>
 							)}
 							<Spacer position="left" size="large" />
@@ -54,8 +54,7 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
 							<Icon style={{ width: 15, height: 15 }} source={{ uri: icon }} />
 						</SectionEnd>
 					</Section>
-
-					<Address>{address}</Address>
+					<Address>{vicinity}</Address>
 				</Info>
 			</RestaurantCard>
 		</View>
