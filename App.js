@@ -14,22 +14,8 @@ import { SafeArea } from "./src/components/utility/safe-area.component";
 import { Ionicons } from "@expo/vector-icons";
 import { RestaurantsContextProvider } from "./src/services/restaurants/restaurant.context";
 import { LocationContextProvider } from "./src/services/restaurants/location/location.context";
+import Navigation from "./src/infrastructure/navigation";
 const Tab = createBottomTabNavigator();
-
-const Settings = () => {
-	return (
-		<SafeArea>
-			<Text>Setting</Text>
-		</SafeArea>
-	);
-};
-const Map = () => {
-	return (
-		<SafeArea>
-			<Text>Setting</Text>
-		</SafeArea>
-	);
-};
 
 export default function App() {
 	const [oswaldLoaded] = useOswald({
@@ -46,37 +32,7 @@ export default function App() {
 			<ThemeProvider theme={theme}>
 				<LocationContextProvider>
 					<RestaurantsContextProvider>
-						<NavigationContainer>
-							<Tab.Navigator
-								screenOptions={({ route }) => ({
-									tabBarIcon: ({ focused, color, size }) => {
-										let iconName;
-										if (route.name === "Restaurants") {
-											iconName = focused ? "restaurant" : "restaurant-outline";
-										} else if (route.name === "Map") {
-											iconName = focused ? "map" : "map-outline";
-										} else if (route.name === "Settings") {
-											iconName = focused ? "settings" : "settings-outline";
-										}
-
-										return (
-											<Ionicons
-												name={iconName}
-												size={size}
-												color={color}
-											></Ionicons>
-										);
-									},
-									tabBarActiveTintColor: "tomato",
-									tabBarInactiveTintColor: "gray",
-									headerShown: false,
-								})}
-							>
-								<Tab.Screen name="Restaurants" component={RestaurantScreen} />
-								<Tab.Screen name="Map" component={Map} />
-								<Tab.Screen name="Settings" component={Settings} />
-							</Tab.Navigator>
-						</NavigationContainer>
+						<Navigation></Navigation>
 					</RestaurantsContextProvider>
 				</LocationContextProvider>
 				<ExpoStatusBar style="auto" />
